@@ -14,9 +14,15 @@ namespace CMP1903_A1_2324
          */
 
         //Property
-
+        public int Value = 1;
 
         //Method
+        public int Roll()
+        {
+            Random rnd = new Random();
+            Value = rnd.Next(1, 6);
+            return Value;
+        }
 
 
     }
