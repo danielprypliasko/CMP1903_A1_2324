@@ -16,22 +16,33 @@ namespace CMP1903_A1_2324
          * Use debug.assert() to make the comparisons and tests.
          */
 
-        //Method
+        //Methods
+
+        // <summary>
+        // Instantiates a Game object, then runs its methods multiple times to test its results, outputs to console when finished
+        // </summary>
         public void Test()
         {
             Game game = new Game();
             game.Instantiate();
-            for (int i = 0; i < 999999; i++)
+            for (int i = 0; i < 9999; i++)
             {
+                // Run the Roll method, test if the Die values are out of range with an assertion
                 game.Roll();
-                Debug.Assert(game.DieOne.Value >= 1 && game.DieOne.Value <= 6);
-                Debug.Assert(game.DieTwo.Value >= 1 && game.DieTwo.Value <= 6);
-                Debug.Assert(game.DieThree.Value >= 1 && game.DieThree.Value <= 6);
-                game.Sum();
-                Debug.Assert(game.Total == (game.DieOne.Value + game.DieTwo.Value + game.DieThree.Value));
+                foreach (Die die in game.DieList)
+                {
+                    Debug.Assert( die.Value >= 1 && die.Value <= 6, "Die value out of range");
+                }
 
+                // Run the Sum method, then sum up all the dice in our own loop and compare the two with an assertion
+                game.Sum();
+                int total = 0;
+                foreach (Die die in game.DieList)
+                {
+                    total += die.Value;
+                }
+                Debug.Assert(game.Total == total, "Die sum incorrectly computed");
             }
-            game.Report();
             Console.WriteLine("Testing finished succesfully");
         }
     }
