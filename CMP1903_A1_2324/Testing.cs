@@ -16,32 +16,57 @@ namespace CMP1903_A1_2324
          * Use debug.assert() to make the comparisons and tests.
          */
 
+        //Properties
+        private Game _testGame = new Game();
+
         //Methods
 
         // <summary>
-        // Instantiates a Game object, then runs its methods multiple times to test its results, outputs to console when finished
+        // Runs a method on our Game property to set it up
+        // </summary>
+        private void SetupTests() {
+
+            _testGame.Instantiate();
+        }
+
+        // <summary>
+        // Runs the Roll method on our Game object,
+        // and checks if every Die objects value is in range using an assertion
+        // </summary>
+        private void RollTest()
+        {
+            _testGame.Roll();
+            foreach (Die die in _testGame.DieList)
+            {
+                Debug.Assert(die.Value >= 1 && die.Value <= 6, "Die value out of range");
+            }
+        }
+
+        // <summary>
+        // Runs the Sum method on our Game object,
+        // and checks if the Sum is correct by summing up all the Die objects and comparing with an Assertion
+        // </summary>
+        private void SumTest() {
+            _testGame.Sum();
+            int total = 0;
+            foreach (Die die in _testGame.DieList)
+            {
+                total += die.Value;
+            }
+            Debug.Assert(_testGame.Total == total, "Die sum incorrectly computed");
+        }
+
+        // <summary>
+        // Sets up and runs the proper tests,
+        // outputs to console when done
         // </summary>
         public void Test()
         {
-            Game game = new Game();
-            game.Instantiate();
+            SetupTests();
             for (int i = 0; i < 9999; i++)
             {
-                // Run the Roll method, test if the Die values are out of range with an assertion
-                game.Roll();
-                foreach (Die die in game.DieList)
-                {
-                    Debug.Assert( die.Value >= 1 && die.Value <= 6, "Die value out of range");
-                }
-
-                // Run the Sum method, then sum up all the dice in our own loop and compare the two with an assertion
-                game.Sum();
-                int total = 0;
-                foreach (Die die in game.DieList)
-                {
-                    total += die.Value;
-                }
-                Debug.Assert(game.Total == total, "Die sum incorrectly computed");
+                RollTest();
+                SumTest();
             }
             Console.WriteLine("Testing finished succesfully");
         }
