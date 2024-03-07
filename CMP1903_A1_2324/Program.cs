@@ -14,6 +14,21 @@ namespace CMP1903_A1_2324
              * Create a Game object and call its methods.
              * Create a Testing object to verify the output and operation of the other classes.
              */
+
+            // Instantiate a Game object
+            Game game = new Game();
+            // Run the Play method
+            game.Play();
+
+
+            // After, we create a Testing object
+            Testing testing = new Testing();
+            // and run the Test method
+            testing.Test(); 
+
+
+            // Console.Read() so we don't exit instantly
+            Console.Read();
         }
     }
 }
